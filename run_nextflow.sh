@@ -17,29 +17,25 @@ module load nextflow
 export root=/gpfs/space/home/dzvenymy
 
 #-stub-run
-#nextflow main.nf  --in_file "${root}/qtl_labeling/moa_data/full_dataset_with_labeled_eqtls_and_negatives.csv"  --HOME $root --cell_type 156 \
-#                --out_dir "${root}/Thesis/nextflow_output_full_dataset_cropped_enformer"
+nextflow main.nf  --in_file "${root}/qtl_labeling/moa_data/full_dataset_with_labeled_eqtls_and_negatives.csv"  --HOME $root --cell_type 156 \
+                --out_dir "${root}/Thesis/nextflow_output_full_dataset_cropped_enformer"
 
-
-
-
-CSV_DIR="/gpfs/space/home/dzvenymy/qtl_labeling/cQTL_data"
-
-# Loop through all CSV files in the directory
-for csv_file in "$CSV_DIR"/*.csv; do
-
-  if [ -e "${root}/qtl_labeling/cQTL_data/Enformer_crop/${csv_file%.*}_enformer_preds.csv" ]; then
-    echo "File exists"
-  else
-    # Check if the file is a regular file (and not an empty pattern)
-    if [ -f "$csv_file" ]; then
-        echo "Processing $csv_file"
-        # Add your processing commands here
-        # For example, you might want to count lines in each CSV
-        nextflow enformer_main.nf  --HOME $root --cell_type 156 \
-                --out_dir "${root}/qtl_labeling/cQTL_data/Enformer_crop/" --in_file $csv_file
-    fi
-  fi
-done
+#CSV_DIR="/gpfs/space/home/dzvenymy/qtl_labeling/cQTL_data"
+#
+#for csv_file in "$CSV_DIR"/*.csv; do
+#
+#  if [ -e "${root}/qtl_labeling/cQTL_data/Enformer_crop/${csv_file%.*}_enformer_preds.csv" ]; then
+#    echo "File exists"
+#  else
+#    # Check if the file is a regular file (and not an empty pattern)
+#    if [ -f "$csv_file" ]; then
+#        echo "Processing $csv_file"
+#        # Add your processing commands here
+#        # For example, you might want to count lines in each CSV
+#        nextflow enformer_main.nf  --HOME $root --cell_type 156 \
+#                --out_dir "${root}/qtl_labeling/cQTL_data/Enformer_crop/" --in_file $csv_file
+#    fi
+#  fi
+#done
 
 
